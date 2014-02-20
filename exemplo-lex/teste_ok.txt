@@ -1,4 +1,4 @@
-foo bar "bla" "hello world"
+foo(bar) "bla" "hello world"
 
 foo"weeee" foo foo
 bar

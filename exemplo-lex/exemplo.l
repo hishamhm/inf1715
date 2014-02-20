@@ -1,6 +1,8 @@
 %{
 #define FOO 100
 #define BAR 101
+#define OP 300
+#define CP 301
 #define STRING 200
 #define ERROR 999999
 
@@ -12,8 +14,12 @@ int done = 0;
 
 \"([^\n"\\]|\\["\\])*\" { return STRING; }
 
-foo	{ return FOO; }
+"foo"	{ return FOO; }
 bar	{ return BAR; }
+
+"("	{ return OP; }
+")"	{ return CP; }
+
 
 ([ \t\n]*)	{ }
 
@@ -32,3 +38,4 @@ int main() {
 	}
 	return 0;
 }
+	
