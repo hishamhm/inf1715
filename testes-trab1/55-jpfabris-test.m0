@@ -1,0 +1,48 @@
+fun soma(a:int,b:int) :int /*Funcao que soma dois inteiros
+  return a+b
+  
+
+fun main()
+  p1:new int
+  p2:new int
+  a:new int
+  b:new int
+  p1=10
+  p2=p1*p1
+  a=p2-p1
+  b=p1*p2
+  p1=b/p2
+  soma(p1,p2)
+  return 
+
+fun main() :bool
+  a:new [20]char
+  a="Teste Lexico"
+  a="Teste errado com string
+  b:new int
+  b=10
+  c:new int
+  c=25
+  if c > b
+     b=b*3
+  while c <> 0
+     c=c-1
+  return c and b
+
+/*Testando*/
+/**/a/****/
+/***/a/****/
+/**/*/a/****/
+/**/a/**** **/
+/***/** ** **/a/****/
+/****/a/*******/***/*b*/
+
+fun main()
+  a:new [20]char
+  a="Testando primeira string"
+  a="Testando em \n duas linhas"
+  a="\\\n Uma linha"
+  a="\\\n\n Mais um espaco"
+
+return
+

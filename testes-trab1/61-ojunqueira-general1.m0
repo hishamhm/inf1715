@@ -1,0 +1,23 @@
+// hello
+
+/*
+comentario 2
+
+*/
+
+
+p : " ola ola "
+/*
+x : int
+y : int
+*/
+x <> 3
+_ < 3
+y = 4 + 6
+temp = 0
+_temp = 2 - 10
+_temp2 = 4
+
+if (x <= 5)
+ y = 2
+end

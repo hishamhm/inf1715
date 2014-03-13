@@ -1,0 +1,10 @@
+/* multi-comment in one line */
+/* multi-comment 
+in two lines */
+preceding /* multi-comment in one line */
+/* multi-comment in one line */ afterwards
+preceding /* multi-comment 
+in two lines */
+/* multi-comment 
+in two lines */ afterwards
+

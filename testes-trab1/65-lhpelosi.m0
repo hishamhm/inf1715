@@ -1,0 +1,55 @@
+// >>> Teste de tokens de palavras reservadas validas
+if else end while loop fun return new string int char bool true false and or not
+
+// >>> Teste de tokens simbolos validos
+( ) , : > < >= <= = <> [ ] + - * /
+
+// >>> Teste de identificadores
+i id i0 id0 id10 _ _i _id _i0 _id0 _id10
+
+// >>> Teste de numeros
+0 10 123456789
+0xf 0x10 0xF 0x1f 0xffff
+
+// >>> Teste de string
+"string" "str""ing" "str\"\"ing"
+"string\"""string\\\""
+"str\ning" "\tstring"
+""
+" "
+
+// >>> Teste de comentario
+// comment
+/* comment */ /** comment **/ /*** comment ***/
+// /* comment */
+/* comment
+	comment // comment
+   comment /*
+   comment
+*/
+
+// >>> Testa nova linha com espaco e tabulacao (tokens '*' para marcar o inicio e fim)
+*
+   
+	
+   	
+   
+*	
+
+// >>> Teste para verificar diferenciacao de tokens juntos e separados
+< = <= ==
+returnid
+ifelse
+
+// >>> Teste de comentario aninhado errado
+/* COMM
+   E // Comment
+   NT /*
+   Abaixo deve sobrar um fechamento de comentario que nao casa */
+*/
+
+// >>> ERRO: Simbolos que nao devem ser lidos como tokens
+~ ? @ $ $$$ { } ! ;
+
+// >>> ERRO: Simbolos errados gerando sequencia errada de tokens
+$*comment*$

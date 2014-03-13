@@ -1,0 +1,23 @@
+//Line comment
+fun foo(var:bool, _var2:int) :string
+
+    if 0xFA <>var2
+        
+        intarray:new [2]int
+        _int:int
+        a : string
+        int2 : int
+        
+        a = "string"
+        
+        _int = 46+(46-2)
+        _int = _int / 2       
+        
+        /*   /  */
+            //Nested comment
+        /***/      
+    end
+    
+    return a
+    
+end

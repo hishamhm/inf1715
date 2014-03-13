@@ -1,0 +1,12 @@
+fun main() :bool
+  a:new [20]char
+  a="Teste Lexico"
+  b:new int
+  b=10
+  c:new int
+  c=25
+  if c > b
+     b=b*3
+  while c <> 0
+     c=c-1
+  return c and b
