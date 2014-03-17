@@ -3,6 +3,9 @@
 
 %}
 
+%glr-parser
+%expect-rr 1
+
 %token NUM ID COOR RECT
 
 %%
@@ -11,7 +14,7 @@ start : RECT ID '=' rect ';' '\n'
       | COOR ID '=' coor ';' '\n'
       ;
 
-num : NUM
+num : NUM                                           
     | ID
     ;
 
@@ -28,6 +31,7 @@ rect : RECT '(' coor ',' coor ')'
 
 int yyerror(const char* s) {
    printf("************** Error! %s ************** \n", s);
+   
 }
 
 int yylex() {

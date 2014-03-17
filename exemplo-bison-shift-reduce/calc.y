@@ -11,8 +11,8 @@ typedef struct Token_ {
 
 %token DIGIT;
 
-//%left '+' '-'
-//%left '*' '/'
+%right '+' '-'
+%left '*' '/'
 
 %%
 
