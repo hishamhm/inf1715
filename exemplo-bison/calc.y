@@ -13,10 +13,11 @@ typedef struct Token_ {
 
 %%
 
-line : expr '\n'            { printf("%d\n", $1); }
+line : expr '\n'            { printf("%d\n", $1.value); }
      ;
 
 expr : expr '+' term        { $$.value = $1.value + $3.value; }
+     | expr '-' term        { $$.value = $1.value - $3.value; }
      | term
      ;
 
