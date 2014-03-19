@@ -22,14 +22,10 @@ coor_id : coor
         | ID
         ;
 
-rect_or_close : ')'
-              | ',' num ',' num ')'
-              ;
-
 rect : RECT '(' NUM ',' num ',' num ',' num ')'
      | RECT '(' coor ',' coor_id ')'
      | RECT '(' ID ',' coor ')'
-     | RECT '(' ID ',' num rect_or_close
+     | RECT '(' ID ',' num ',' num ',' num ')'
      | ID
      ;
 
