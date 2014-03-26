@@ -1,4 +1,4 @@
-programa  → funcao { funcao }
+programa  → { NL } funcao { funcao }
 nl        → NL { NL }
 funcao    → 'fun' ID '(' params ')' [ ':' tipo ] nl
                { declvar nl }
