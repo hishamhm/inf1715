@@ -1,5 +1,7 @@
-programa  → { NL } funcao { funcao }
+programa  → { NL } decl { decl }
+decl      → funcao | global
 nl        → NL { NL }
+global    → declvar nl
 funcao    → 'fun' ID '(' params ')' [ ':' tipo ] nl
                bloco
             'end' nl
