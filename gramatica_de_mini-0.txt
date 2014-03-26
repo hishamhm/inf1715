@@ -15,21 +15,23 @@ cmdif     → 'if' exp nl
             { 'else' 'if' exp nl
                { comando nl }
             }
-            { 'else' nl
+            [ 'else' nl
                { comando nl }
-            }
+            ]
             'end'
 cmdwhile  → 'while' exp nl
                { comando nl }
             'loop'
-cmdatrib  → ID '=' exp
+cmdatrib  → var '=' exp
 chamada   → ID '(' listaexp ')'
 listaexp  → /*vazio*/ | exp { ',' exp }
 cmdreturn → 'return' exp | 'return'
+var       → ID | var '[' exp ']'
 exp       → LITNUMERAL
           | LITSTRING
           | TRUE
           | FALSE
+          | var
           | 'new' '[' exp ']' tipo
           | '(' exp ')'
           | chamada
