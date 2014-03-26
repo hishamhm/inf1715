@@ -1,0 +1,49 @@
+programa  → funcao { funcao }
+nl        → NL { NL }
+funcao    → 'fun' ID '(' params ')' [ ':' tipo ] nl
+               { declvar nl }
+               { comando nl }
+            'end' nl
+params    → /*vazio*/ | parametro { ',' parametro }
+parametro → ID ':' tipo
+tipo      → tipobase | '[' ']' tipo
+tipobase  → 'int' | 'bool' | 'char' | 'string'
+declvar   → ID ':' tipo
+comando   → cmdif | cmdwhile | cmdatrib | cmdreturn | chamada 
+cmdif     → 'if' exp nl
+               { comando nl }
+            { 'else' 'if' exp nl
+               { comando nl }
+            }
+            { 'else' nl
+               { comando nl }
+            }
+            'end'
+cmdwhile  → 'while' exp nl
+               { comando nl }
+            'loop'
+cmdatrib  → ID '=' exp
+chamada   → ID '(' listaexp ')'
+listaexp  → /*vazio*/ | exp { ',' exp }
+cmdreturn → 'return' exp | 'return'
+exp       → LITNUMERAL
+          | LITSTRING
+          | TRUE
+          | FALSE
+          | 'new' '[' exp ']' tipo
+          | '(' exp ')'
+          | chamada
+          | exp '+' exp
+          | exp '-' exp
+          | exp '*' exp
+          | exp '/' exp
+          | exp '>' exp
+          | exp '<' exp
+          | exp '>=' exp
+          | exp '<=' exp
+          | exp '=' exp
+          | exp '<>' exp
+          | exp 'and' exp
+          | exp 'or' exp
+          | 'not' exp
+          | '-' exp
