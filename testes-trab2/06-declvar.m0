@@ -1,0 +1,15 @@
+
+fun foo()
+   x:[]int
+   x = new [10]int
+end
+
+fun _()
+   x:[]int
+   y: bool
+   x = new [10]int
+   if y = true
+      print("ola")
+   end
+end
+

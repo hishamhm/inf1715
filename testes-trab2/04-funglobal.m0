@@ -1,0 +1,13 @@
+
+x:int
+fun f()
+   x = 0
+end
+
+y:int
+
+fun g()
+   y = 0
+end
+
+   

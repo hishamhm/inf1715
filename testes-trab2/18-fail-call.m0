@@ -1,0 +1,7 @@
+
+
+fun fibo(i:int):int
+   fibo(12)
+   fibo[13](12)
+end
+

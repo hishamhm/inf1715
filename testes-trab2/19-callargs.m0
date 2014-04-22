@@ -1,0 +1,16 @@
+
+fun f(i:int):int
+   f()
+end
+
+fun f(i:int):int
+   f(i)
+end
+
+fun f(i:int):int
+   f(i,12)
+end
+
+fun f(i:int):int
+   f(i,12,ovo)
+end

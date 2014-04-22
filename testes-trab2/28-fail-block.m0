@@ -1,0 +1,5 @@
+
+fun f()
+   x = 0
+   x:int
+end

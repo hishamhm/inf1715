@@ -1,0 +1,19 @@
+
+fun hehe(c:char):bool
+   i: int
+   i = 0
+   if c = 64
+      while i < 10
+         if i / 2 * 2 == i
+            printf("%d\n", i)
+         end
+            printf("******\n", i)
+         loop
+         i = i+1
+      end
+      return true
+   else
+      return false
+   end
+end
+

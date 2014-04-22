@@ -1,0 +1,7 @@
+
+fun sim()
+   if 1 > 2
+      return
+   end
+end
+

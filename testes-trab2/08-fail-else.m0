@@ -1,0 +1,18 @@
+
+
+fun j()
+   if a == 0
+      x = 13
+   else if a == 1
+      x = 14
+   else if a == 2
+      x = 14
+   else
+      x = 14
+   else if a == 3
+      x = 14
+   else if a == false
+      x = 14
+   end
+end
+

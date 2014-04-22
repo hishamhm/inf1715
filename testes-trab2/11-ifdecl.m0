@@ -1,0 +1,13 @@
+
+fun i():bool
+   if a <> 3
+      y:int
+      y = 13
+      return y < 10
+   else
+      y:bool
+      y = false
+      return y = true
+   end
+end
+

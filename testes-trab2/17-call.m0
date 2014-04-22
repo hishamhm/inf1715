@@ -1,0 +1,10 @@
+
+/* FIBOOOOOOOOOOOOOOOOOO */
+fun fibo(i:int):int
+   if i <= 1
+      return 1
+   else
+      return fibo(i-1) + fibo(i-2)
+   end
+end
+

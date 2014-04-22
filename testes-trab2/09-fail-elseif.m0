@@ -1,0 +1,8 @@
+
+fun i()
+   if a <> 3
+      x = 13
+   else if
+      x = 14
+   end
+end
