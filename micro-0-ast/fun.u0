@@ -1,0 +1,30 @@
+
+
+auholuh aoleuhaoe uaoe
+
+fun f()
+   x:int
+end
+
+fun f()
+   x:int
+   g()
+end
+
+fun f()
+   x:int
+   y:int
+   g()
+end
+
+fun f()
+   x:int
+   y:int
+   g()
+   h()
+end
+
+fun f()
+   g()
+   h()
+end
