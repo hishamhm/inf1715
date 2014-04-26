@@ -1,0 +1,29 @@
+
+fun f()
+   x:int
+end
+
+fun f()
+   x:int
+   g()
+end
+
+fun f()
+   x:int
+   y:int
+   g()
+   x=0
+end
+
+fun f()
+   x:int
+   y:int
+   g()
+   h()
+end
+
+fun f()
+   g()
+   h()
+   f=0
+end
