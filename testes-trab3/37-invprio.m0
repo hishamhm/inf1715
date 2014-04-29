@@ -1,0 +1,21 @@
+
+fun exps()
+
+   // cada par abaixo deve gerar duas arvores diferentes
+
+   a = not a + not b
+   a = not (a + not b)
+   
+   b = -a + not b
+   b = -(a + not b)
+   
+   c = a + b * c
+   c = (a + b) * c
+   
+   d = a or b and c
+   d = (a or b) and c
+   
+   e = a and b = c
+   e = (a and b) = c
+end
+

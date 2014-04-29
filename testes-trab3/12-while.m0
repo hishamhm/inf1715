@@ -1,0 +1,11 @@
+
+fun hehe():bool
+   i: int
+   i = 0
+   while i < 10
+      printf("%d\n", i)
+      i = i+1
+   loop
+   return true
+end
+

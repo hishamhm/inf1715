@@ -1,0 +1,25 @@
+
+fun foo()
+end
+
+fun foo(x:int)
+end
+
+fun foo(x:int, y:int)
+end
+
+fun foo(x:int, y:int)
+end
+
+fun foo():bool
+end
+
+fun foo(x:int):bool
+end
+
+fun foo(x:int, y:int):[]int
+end
+
+fun foo(x:int, y:[]int):[][]int
+end
+

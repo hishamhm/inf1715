@@ -1,0 +1,34 @@
+
+fun exps()
+   i = 10            // exp      → LITNUMERAL
+   s = "hello"       //          | LITSTRING
+   t = true          //          | TRUE
+   f = false         //          | FALSE
+   v = i             //          | var
+   k = new [x]bool   //          | 'new' '[' exp ']' tipo
+   x = new [x][]int
+   y = (x)           //          | '(' exp ')'
+   y = foo()         //          | chamada
+   a = 1 + 1         //          | exp '+' exp
+   b = 1-1           //          | exp '-' exp
+   c = 4*5           //          | exp '*' exp
+   d = 6/7           //          | exp '/' exp
+   e = a>b           //          | exp '>' exp
+   f = d<c           //          | exp '<' exp
+   g = a>=12         //          | exp '>=' exp
+   a = a<=a          //          | exp '<=' exp
+   a=a=a=a=a         //          | exp '=' exp
+   a=b<>c=d          //          | exp '<>' exp
+   c=x>5 and y<2     //          | exp 'and' exp
+   d=a and b or c    //          | exp 'or' exp
+   e=not a > b       //          | 'not' exp
+   f=3--2            //          | '-' exp
+   x=1+2*3+4
+   if f(x+3) > 2 or x <= 3
+      print("woof")
+   end
+   if x and y or z and w
+      print("woof")
+   end
+end
+

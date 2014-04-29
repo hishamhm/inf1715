@@ -1,0 +1,11 @@
+
+i:int
+
+fun f ()
+   i = 1
+end
+
+fun g()
+   i:int
+   i = 2
+end

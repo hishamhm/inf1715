@@ -1,0 +1,9 @@
+
+fun exps()
+   a = not a + not b
+   b = -a + not b
+   c = a + b * c
+   d = a or b and c
+   e = a and b = c
+end
+

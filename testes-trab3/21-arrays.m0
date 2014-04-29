@@ -1,0 +1,19 @@
+
+fun make_matrix(x:int, y:int):[][]int
+   a:[][]int
+   i:int
+   j:int
+   i = 0
+   a= new [y][]int
+   while i < y
+      a[i] = new [x]int
+      j = 0
+      while j < x
+         a[i][j] = i*j
+         j = j + 1
+      loop
+      i = i + 1
+   loop
+   return a
+end
+
