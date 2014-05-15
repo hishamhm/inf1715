@@ -23,6 +23,7 @@ goto	{ return GOTO; }
 param	{ return PARAM; }
 call	{ return CALL; }
 ret	{ return RET; }
+byte	{ return BYTE; }
 "=="	{ return EQ; }
 "!="	{ return NE; }
 "<="	{ return LE; }

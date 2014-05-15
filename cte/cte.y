@@ -7,7 +7,7 @@ extern int yyerror(char* msg);
 %}
 
 %token ERROR
-%token FUN GLOBAL STRING LABEL ID NEW IF IFFALSE GOTO PARAM CALL RET NL
+%token FUN GLOBAL STRING BYTE LABEL ID NEW IF IFFALSE GOTO PARAM CALL RET NL 
 %token LITSTRING LITNUM
 %token EQ NE LE GE
 
@@ -30,13 +30,13 @@ nl		: NL opt_nl ;
 opt_nl		: NL opt_nl
 		|;
 
-function	: FUN ID '(' args ')' nl
-		  commands
-		;
+string		: STRING ID '=' LITSTRING nl
 
 global		: GLOBAL ID nl
 
-string		: STRING ID '=' LITSTRING nl
+function	: FUN ID '(' args ')' nl
+		  commands
+		;
 
 args		: arg more_args
 		|;
@@ -58,9 +58,12 @@ rval		: LITNUM
 		;
 
 command		: ID '=' rval
+		: ID '=' BYTE rval
 		| ID '=' rval binop rval
 		| ID '=' unop rval
 		| ID '=' ID '[' rval ']'
+		| ID '[' rval ']' '=' rval
+		| ID '[' rval ']' '=' BYTE rval
 		| IF ID GOTO LABEL
 		| IFFALSE ID GOTO LABEL
 		| GOTO LABEL
