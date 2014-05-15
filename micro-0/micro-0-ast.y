@@ -54,7 +54,7 @@ commands	: command nl commands	{ $$.node = AST_prependSibling($3.node, $1.node);
 command		: ID '(' ')'		{ $$.node = AST_new(AST_CALL, $1.line);
 					  AST_addChild($$.node, AST_newFromToken($1)); }
 		| ID '=' LITNUM		{ $$.node = AST_new(AST_ASSIGN, $1.line);
-					  AST_addChild($$.node, AST_newFromToken($1));}
+					  AST_addChild($$.node, AST_newFromToken($1));
 					  AST_addChild($$.node, AST_newFromToken($3));}
 		;
 
