@@ -50,7 +50,7 @@ arg		: ID
 commands	: label command nl commands
 		| ;
 
-label		: LABEL ':'
+label		: LABEL ':' opt_nl label
 		|;
 
 rval		: LITNUM
@@ -58,11 +58,12 @@ rval		: LITNUM
 		;
 
 command		: ID '=' rval
-		: ID '=' BYTE rval
+		| ID '=' BYTE rval
 		| ID '=' rval binop rval
 		| ID '=' unop rval
 		| ID '=' ID '[' rval ']'
 		| ID '[' rval ']' '=' rval
+		| ID '=' BYTE ID '[' rval ']'
 		| ID '[' rval ']' '=' BYTE rval
 		| IF ID GOTO LABEL
 		| IFFALSE ID GOTO LABEL
@@ -86,6 +87,7 @@ binop		: EQ
 
 unop		: '-'
 		| NEW
+		| NEW BYTE
 		;
 
 call		: params

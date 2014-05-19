@@ -43,7 +43,7 @@ byte	{ return BYTE; }
 "*"	{ return '*'; }
 "/"	{ return '/'; }
 
-@[A-Za-z_0-9]* { return LABEL; }
+\.[A-Za-z_0-9]* { return LABEL; }
 [A-Za-z$_][A-Za-z_0-9]* { return ID; }
 
 ([ \t]*\n)+[ \t]*	{ return NL; }
