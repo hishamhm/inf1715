@@ -1,0 +1,4 @@
+glob:bool
+fun foo():[][]int
+   return glob
+end

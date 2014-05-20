@@ -1,0 +1,6 @@
+
+glob:int
+
+fun foo()
+   glob = true
+end

@@ -1,0 +1,4 @@
+glob:string
+fun foo():[]char
+   return glob
+end

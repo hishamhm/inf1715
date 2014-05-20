@@ -1,0 +1,3 @@
+fun foo(v:[]bool):char
+   return v[0]
+end

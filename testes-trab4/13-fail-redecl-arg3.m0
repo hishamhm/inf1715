@@ -1,0 +1,10 @@
+
+fun foo(i: int): int
+   /*
+    argumentos ficam no mesmo escopo
+    do primeiro nivel de escopo da funcao,
+    logo, isto e' um erro:
+   */
+   i: int
+   return 1
+end

@@ -1,0 +1,4 @@
+glob:int
+fun foo():int
+   return glob
+end

@@ -1,0 +1,10 @@
+
+fun foo(do_it: bool)
+   x: int
+   b: bool
+   if do_it
+      b = 20
+      return
+   end
+   b = false
+end

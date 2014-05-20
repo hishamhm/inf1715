@@ -1,0 +1,17 @@
+
+fun foo()
+   a: int
+   b: bool
+   a = 10
+   b = true
+   while true
+      while a < 2
+         while b
+            while b = true
+               a = 2
+            loop
+         loop
+      loop
+   loop
+end
+

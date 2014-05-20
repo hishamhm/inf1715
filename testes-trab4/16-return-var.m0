@@ -1,0 +1,49 @@
+
+fun fn_int(): int
+   i: int 
+   i = 10
+   return i
+end
+
+fun fn_char(): char
+   c: char
+   c = 100
+   return c
+end
+
+fun fn_bool(): bool
+   b: bool
+   b = false
+   return b
+end
+
+fun fn_string(): string
+   s: string
+   s = "hello"
+   return s
+end
+
+fun fn_vint(): []int
+   vi: []int
+   vi = new [10]int
+   return vi
+end
+
+fun fn_vchar(): []char
+   vc: []char
+   vc = new [10]char
+   return vc
+end
+
+fun fn_vbool(): []bool
+   vb: []bool
+   vb = new [10]bool
+   return vb
+end
+
+fun fn_vvint(): [][]int
+   vvi: [][]int
+   vvi = new [10][]int
+   return vvi
+end
+

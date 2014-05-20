@@ -1,0 +1,10 @@
+
+fun foo(do_it: bool)
+   c: char
+   b: bool
+   if do_it
+      c = "hello"
+      return
+   end
+   c = 64
+end

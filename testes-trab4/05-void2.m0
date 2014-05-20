@@ -1,0 +1,12 @@
+
+fun foo(a: bool): int
+   return 1
+end
+
+fun bar()
+   /*
+   ignorar retorno da funcao
+   nao e' erro 
+   */
+   foo(true)
+end

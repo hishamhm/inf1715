@@ -1,0 +1,7 @@
+
+fun foo(): bool
+   a: int
+   b: bool
+   return a < b
+end
+

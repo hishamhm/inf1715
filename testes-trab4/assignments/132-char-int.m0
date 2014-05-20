@@ -1,0 +1,5 @@
+fun foo()
+   a: char
+   b: int
+   a = b
+end

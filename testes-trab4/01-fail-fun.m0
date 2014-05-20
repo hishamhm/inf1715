@@ -1,0 +1,10 @@
+
+fun foo(): string
+   return "hello"
+end
+
+fun bar()
+   i: int
+   // retorno da funcao errado
+   i = foo()
+end

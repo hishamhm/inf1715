@@ -1,0 +1,28 @@
+
+fun print(s: string)
+end
+
+fun foo()
+   a: int
+   b: bool
+   a = 10
+   b = true
+   if true
+      if a < 2
+         if b
+            if b = true
+               a = 2
+            end
+         else if not b 
+            b = false
+         end
+      else if a > 20
+         print("this will never happen!")
+      else if a = 10
+         print("hello!")
+      end
+   else
+      print("this will never happen!")
+   end
+end
+

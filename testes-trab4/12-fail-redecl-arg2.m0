@@ -1,0 +1,5 @@
+
+// erro: arg redeclarado, nao importa tipo
+fun foo(i: int, i: bool): int
+   return 1
+end

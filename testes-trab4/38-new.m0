@@ -1,0 +1,12 @@
+
+fun foo(): []int
+   x: []int
+   a: int
+   b: int
+   if true
+      a = 10
+      b = 20
+      x = new [a + b]int
+      return x
+   end
+end

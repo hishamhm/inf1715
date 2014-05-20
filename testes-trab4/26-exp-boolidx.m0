@@ -1,0 +1,20 @@
+
+fun foo(): int
+   a: bool
+   b: int
+   c: int
+   d: char
+   bs: []bool
+   bs = new [2]bool
+   bs[0] = true
+   bs[1] = false
+   a = d > b or bs[1]
+   a = bs[0] or d > b
+   a = d > b and bs[1]
+   a = bs[0] and d > b
+   a = bs[0] and bs[1]
+   a = bs[0] or (bs[0] = bs[1])
+   a = bs[1] or not (bs[0] = bs[1])
+   a = not(bs[1] or not (bs[0] = bs[1]))
+   a = not(bs[1] or not (b = c))
+end

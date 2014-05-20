@@ -1,0 +1,3 @@
+fun foo(v:[]string):int
+   return v[0]
+end

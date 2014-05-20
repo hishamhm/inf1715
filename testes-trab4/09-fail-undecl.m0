@@ -1,0 +1,4 @@
+
+fun foo()
+   glob = true
+end

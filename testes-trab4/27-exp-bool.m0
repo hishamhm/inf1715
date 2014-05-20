@@ -1,0 +1,26 @@
+
+fun foo(): int
+   a: bool
+   b: int
+   c: int
+   d: char
+   b1: bool
+   b2: bool
+   a = b < c
+   a = b > c
+   a = b <= c
+   a = b >= c
+   a = b = c
+   a = b <> c
+   a = b = b or c = c
+   a = b > c or c < b
+   a = d > b or a
+   a = a or d > b
+   a = d > b and a
+   a = a and d > b
+   a = b1 and b2
+   a = b1 or (b2 = b1)
+   a = b1 or not (b2 = b1)
+   a = not(b1 or not (b2 = b1))
+   a = not(b1 or not (b = c))
+end

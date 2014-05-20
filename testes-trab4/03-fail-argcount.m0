@@ -1,0 +1,10 @@
+
+fun foo(i: int): int
+   return 1
+end
+
+fun bar()
+   i: int
+   // numero de args invalido
+   i = foo(1, 2)
+end

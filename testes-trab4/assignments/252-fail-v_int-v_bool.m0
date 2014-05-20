@@ -1,0 +1,5 @@
+fun foo()
+   a: []int
+   b: []bool
+   a = b
+end

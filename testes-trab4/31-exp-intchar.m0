@@ -1,0 +1,15 @@
+
+fun foo(): int
+   a: int
+   b: int
+   c: char
+   d: int
+   a = b + c
+   a = b - c
+   a = b * c
+   a = b / c
+   a = -b
+   a = b + c * d
+   a = b - c / d
+   return a
+end

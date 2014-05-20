@@ -1,0 +1,12 @@
+
+fun fn(cc: char, bb: bool, ii: int)
+end
+
+fun main():int
+   c: char
+   b: bool
+   i: int
+   a: int
+   fn(c + 1, b or c < a, i - 2)
+   return 0
+end

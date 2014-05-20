@@ -1,0 +1,9 @@
+
+fun foo(a: bool)
+   return 1
+end
+
+fun bar()
+   // argumento de tipo invalido
+   foo(2)
+end

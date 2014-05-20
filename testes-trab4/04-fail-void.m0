@@ -1,0 +1,9 @@
+
+fun foo(a: bool)
+end
+
+fun bar()
+   i: int
+   // funcao void, pegando retorno
+   i = foo(true)
+end

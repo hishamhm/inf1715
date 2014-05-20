@@ -1,0 +1,12 @@
+
+fun print(s: string)
+end
+
+fun foo()
+   a: int
+   a = 10
+   while a
+      print("the above line fails!")
+   loop
+end
+

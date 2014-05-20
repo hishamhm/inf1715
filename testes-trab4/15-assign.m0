@@ -1,0 +1,19 @@
+
+fun foo()
+   i: int
+   c: char
+   b: bool
+   s: string
+   vi: []int
+   vc: []char
+   vb: []bool
+   vvi: [][]int
+   i = 10
+   c = 100
+   b = true
+   s = "hello"
+   vi = new [10]int
+   vc = new [10]char
+   vb = new [10]bool
+   vvi = new [10][]int
+end

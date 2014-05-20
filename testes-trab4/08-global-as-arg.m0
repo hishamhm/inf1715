@@ -1,0 +1,11 @@
+
+glob:bool
+
+fun id(b: bool): bool
+   return b
+end
+
+fun foo()
+   x: bool
+   x = id(glob)
+end
