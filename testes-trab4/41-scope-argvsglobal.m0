@@ -1,0 +1,6 @@
+
+i:int
+
+fun foo(i: bool) 
+   i = true
+end

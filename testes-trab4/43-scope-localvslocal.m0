@@ -1,0 +1,13 @@
+
+i:int
+
+fun foo()
+   c: char
+   if 10 < 20
+      c: bool
+      i: bool
+      i = true
+      c = true
+   end
+end
+
