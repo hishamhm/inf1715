@@ -1,0 +1,22 @@
+fun f()
+   x = 0
+fun g()
+   x = 0
+   $t1 = 1 + 1
+   $t0 = $t1 + x
+   x = $t0
+   x = 9
+fun h()
+   x = 0
+   y = 0
+   call g
+fun i()
+   x = 0
+   y = 0
+   $t2 = x + y
+   x = $t2
+   call g
+   call h
+fun j()
+   call g
+   call i

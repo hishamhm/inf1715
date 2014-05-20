@@ -1,0 +1,29 @@
+
+fun f()
+   x:int
+end
+
+fun g()
+   x:int
+   x=1+1+x
+   x=9
+end
+
+fun h()
+   x:int
+   y:int
+   g()
+end
+
+fun i()
+   x:int
+   y:int
+   x = x+ y
+   g()
+   h()
+end
+
+fun j()
+   g()
+   i()
+end
