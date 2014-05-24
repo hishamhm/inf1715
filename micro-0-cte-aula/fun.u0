@@ -5,7 +5,8 @@ end
 
 fun g()
    x:int
-   x=1+1+x
+   y:int
+   x=1+1+x+x+3+9
    x=9
 end
 

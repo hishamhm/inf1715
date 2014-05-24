@@ -6,6 +6,8 @@ int done = 0;
 
 %}
 
+%option yylineno
+
 %%
 
 #.* {}
@@ -32,7 +34,7 @@ byte	{ return BYTE; }
 ","	{ return ','; }
 ")"	{ return ')'; }
 ":"	{ return ':'; }
-"="	{ return ':'; }
+"="	{ return '='; }
 "["	{ return '['; }
 "]"	{ return ']'; }
 

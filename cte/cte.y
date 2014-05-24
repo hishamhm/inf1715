@@ -1,10 +1,18 @@
 %{
+
+#include <stdlib.h>
+#include <stdio.h>
+
 #define YYDEBUG 1
 
+extern FILE* yyin;
 extern int yylex();
-extern int yyerror(char* msg);
+extern int yyerror(const char* msg);
+extern int yylineno;
 
 %}
+
+%define parse.error verbose
 
 %token ERROR
 %token FUN GLOBAL STRING BYTE LABEL ID NEW IF IFFALSE GOTO PARAM CALL RET NL 
@@ -65,8 +73,8 @@ command		: ID '=' rval
 		| ID '[' rval ']' '=' rval
 		| ID '=' BYTE ID '[' rval ']'
 		| ID '[' rval ']' '=' BYTE rval
-		| IF ID GOTO LABEL
-		| IFFALSE ID GOTO LABEL
+		| IF rval GOTO LABEL
+		| IFFALSE rval GOTO LABEL
 		| GOTO LABEL
 		| call
 		| RET rval
@@ -91,8 +99,10 @@ unop		: '-'
 		;
 
 call		: params
-		  CALL ID
-		;
+		  CALL ID /* Em caso de funcoes com valor retorno,
+		             assuma que este esta na
+		             variavel temporaria especial $ret */
+                ;
 
 params		: param nl params
 		|;
@@ -103,11 +113,22 @@ param		: PARAM rval
 
 %%
 
-int yyerror(char* s) {
-	printf("****************** Error! %s ****************** \n", s);
+int yyerror(const char* s) {
+	fprintf(stderr, "*** Error at line %d: %s\n", yylineno, s);
 }
 
-int main() {
-	yydebug = 1;
-	yyparse();
+int main(int argc, char** argv) {
+	int err;
+	//yydebug = 1;
+	if (argc < 2) {
+		fprintf(stderr, "Uso: cte arquivo.m0.ir\n");
+		exit(1);
+	}
+	yyin = fopen(argv[1], "r");
+	err = yyparse();
+	if (err == 0) {
+		printf("File is correct!\n");
+	}
+	fclose(yyin);
+	return err;
 }
