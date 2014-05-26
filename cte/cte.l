@@ -38,8 +38,8 @@ byte	{ return BYTE; }
 "["	{ return '['; }
 "]"	{ return ']'; }
 
-">"	{ return '<'; }
-"<"	{ return '>'; }
+">"	{ return '>'; }
+"<"	{ return '<'; }
 "+"	{ return '+'; }
 "-"	{ return '-'; }
 "*"	{ return '*'; }
