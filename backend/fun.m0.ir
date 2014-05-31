@@ -1,0 +1,73 @@
+
+string id = "bla"
+string zz = "blo"
+
+global g
+global h
+global j
+
+fun f(a)
+   x = 0
+   
+fun g()
+   x = 0
+   y = 0
+.L1:
+   $t9 = x < 10
+   ifFalse $t9 goto .L2
+   $t4 = 1 + 1
+   $t3 = $t4 + x
+   $t2 = $t3 + x
+   $t1 = $t2 + 3
+   $t0 = $t1 + 9
+   i = byte 0
+   v = new byte 10
+   i = byte v[y]
+   v[x] = byte i
+   x = $t0
+   x = 9
+   x = g
+   y = y+1
+   goto .L1
+.L2:
+   z = id
+   
+fun h()
+   x = 0
+   y = 0
+   if 0 goto .L3
+   i = 0
+   v = new 10
+   i = v[y]
+   v[x] = i
+   param x
+   call f
+.L3:
+   ret
+fun i()
+   x = 0
+   y = 0
+   $t5 = x + y
+   x = $t5
+   call g
+   call h
+   ret 12
+   
+fun j()
+   a = 0
+   b = 0
+   c = 0
+   a = b == c
+   a = b != c
+   a = b > c
+   a = b < c
+   a = b >= c
+   a = b <= c
+   a = b + c
+   a = b - c
+   a = b * c
+   a = b / c
+   a = -b
+   call g
+   call i
+   ret

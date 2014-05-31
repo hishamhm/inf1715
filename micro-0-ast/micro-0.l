@@ -3,7 +3,7 @@
 #include "token.h"
 #include "micro-0.tab.h"
 
-int line = 1;
+static int line = 1;
 
 static int Token_new(int type) {
    yylval.type = type;
@@ -67,7 +67,7 @@ static char* convertString(char* text, int len) {
 
 0x[0-9A-Fa-f]+			{ return Token_newInteger(LITNUM, strtol(yytext, NULL, 16)); }
 
-[0-9]+				{ return Token_newInteger(LITNUM, strtol(yytext, NULL, 16)); }
+[0-9]+				{ return Token_newInteger(LITNUM, strtol(yytext, NULL, 10)); }
 
 int				{ return Token_new(INT); }
 end				{ return Token_new(END); }
