@@ -169,13 +169,13 @@ void IR_addFunction(IR* ir, Function* fun);
 void IR_dump(IR* ir, FILE* fd);
 
 String* String_new(char* name, char* value);
-#define String_link(e, l) ((String*)List_link((List*)(e), (List*)(l)))
+#define String_link(_l1, _l2) ((String*)List_link((List*)(_l1), (List*)(_l2)))
 
 Variable* Variable_new(char* name);
-#define Variable_link(e, l) ((Variable*)List_link((List*)(e), (List*)(l)))
+#define Variable_link(_l1, _l2) ((Variable*)List_link((List*)(_l1), (List*)(_l2)))
 
 Instr* Instr_new(Opcode op, ...);
-#define Instr_link(e, l) ((Instr*)List_link((List*)(e), (List*)(l)))
+#define Instr_link(_l1, _l2) ((Instr*)List_link((List*)(_l1), (List*)(_l2)))
 
 Addr Addr_litNum(int num);
 Addr Addr_label(char* label);
