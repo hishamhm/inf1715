@@ -8,6 +8,7 @@ global j
 
 fun f(a)
    x = 0
+   ret
    
 fun g()
    x = 0
@@ -31,6 +32,7 @@ fun g()
    goto .L1
 .L2:
    z = id
+   ret
    
 fun h()
    x = 0
@@ -44,6 +46,7 @@ fun h()
    call f
 .L3:
    ret
+
 fun i()
    x = 0
    y = 0
