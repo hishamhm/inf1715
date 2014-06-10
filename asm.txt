@@ -1,0 +1,65 @@
+
+x %eax
+y %ebx
+z %ecx
+
+x = y
+    movl %ebx, %eax
+
+x = byte y
+    movsbl %bl, %eax
+
+x[y] = z
+    movl %ebx, %esi
+    imul $4, %esi
+    addl %eax, %esi
+    movl %ecx, (%esi)
+
+x[y] = byte z
+    movl %ebx, %esi
+    addl %eax, %esi
+    movb %cl, (%esi)
+
+x = y[z]
+    movl %ecx, %esi
+    imul $4, %esi
+    addl %ebx, %esi
+    movl (%esi), %eax
+
+x = byte y[z]
+    movl %ecx, %esi
+    addl %ebx, %esi
+    movsbl (%esi), %eax
+
+---------------------------------------
+
+Definicao de uma funcao f:
+
+f:
+    pushl %ebp
+    movl %esp, %ebp
+    subl *******, %esp        <-- numero de bytes de locais
+    pushl %ebp
+    pushl %esi
+    pushl %edi
+    .
+    .
+    .
+    popl %edi                <-- sequencia de codigo para ret
+    popl %esi
+    popl %ebp
+    movl %ebp, %esp
+    popl %ebp
+    ret
+
+---------------------------------------
+    
+Chamada f(...)
+
+    ********* <-- spill de %eax, %ecx, %edx
+    push ****** <------ push dos parametros
+    ...
+    call f
+    ********* <-- retorno esta em %eax
+
+---------------------------------------
