@@ -222,7 +222,7 @@ selecionaOperacoes bloco locais nome =
 
       seleciona :: [(IrInstr, FuncProxUso)] -> Estado -> Int -> [String]
       seleciona (c:cs) estado i =
-         saida ++ seleciona cs novoEstado (i+1)
+         ("   /* "++(show i)++" */") : saida ++ seleciona cs novoEstado (i+1)
          where
             (instrucao, proxUso) = c
             contexto = (proxUso, estado, locais, nome, i)
@@ -285,13 +285,13 @@ saiDaMemoria var estado reg =
       novoEstado v2@(Memoria m)     = if var == v2 then (Set.singleton reg)
                                                    else Set.delete reg (estado v2)
 
--- Variável agora está apenas na memória.
-saiDoReg :: Descritor -> Estado -> Descritor -> Estado
-saiDoReg var estado reg =
+-- Spill: variável volta para a memória.
+voltaPraMemoria :: Descritor -> Estado -> Descritor -> Estado
+voltaPraMemoria var estado reg =
    novoEstado
    where
-      novoEstado r2@(Registrador r) = if reg == r2 then Set.delete var (estado r2) else (estado r2)
-      novoEstado v2@(Memoria m)     = if var == v2 then Set.delete reg (estado v2) else (estado v2)
+      novoEstado r2@(Registrador r) = estado r2
+      novoEstado v2@(Memoria m)     = if var == v2 then Set.insert var (estado v2) else (estado v2)
 
 ----------------------------------------------------------------------------------------------------
 
@@ -308,7 +308,7 @@ forcarSpill locais estado (r:rs) =
    (sp ++ sps, novoEstado)
    where
       sp = geraSpills r estado
-      proxEstado = Set.foldr (\var estado2 -> (saiDoReg var estado2 r)) estado (estado r)
+      proxEstado = Set.foldr (\var estado2 -> (voltaPraMemoria var estado2 r)) estado (estado r)
       (sps, novoEstado) = forcarSpill locais proxEstado rs
 
       -- Gera código de spill das variáveis presentes em reg
@@ -497,12 +497,10 @@ geraCodigo (IrX IrRetVal x) contexto =
    (saida, novoEstado)
    where
       (proxUso, estado, locais, nome, i) = contexto
-      -- fim de bloco básico: forçar o spill das locais
-      (spillLocais, estado1) = forcarSpillLocais locais estado
-      contexto2 = (proxUso, estado1, locais, nome, i)
-      (rx, _, _, prepara, estado2) = getReg contexto2 IrRetVal x x x
       -- valor de retorno fica em %eax
-      (spill, novoEstado) = forcarSpill locais estado2 [Registrador "eax"]
+      (spill, estado1) = forcarSpill locais estado [Registrador "eax"]
+      contexto2 = (proxUso, estado1, locais, nome, i)
+      (rx, _, _, prepara, novoEstado) = getReg contexto2 IrRetVal x x x
       operacao = [ "   movl " ++ (escreve rx) ++ ", %eax"
                  , "   popl %edi"
                  , "   popl %esi"
@@ -511,15 +509,15 @@ geraCodigo (IrX IrRetVal x) contexto =
                  , "   popl %ebp"
                  , "   ret"
                  ]
-      saida = spillLocais ++ spill ++ prepara ++ operacao
+      saida = spill ++ prepara ++ operacao
 
 geraCodigo (IrXY IrIf x (IrOpLabel l)) contexto =
    (operacao, novoEstado)
    where
       (_, _, locais, _, _) = contexto
-      (rx, _, _, prepara, estado1) = getReg contexto IrIf x x x
       -- fim de bloco básico: forçar o spill das locais
       (spillLocais, novoEstado) = forcarSpillLocais locais estado1
+      (rx, _, _, prepara, estado1) = getReg contexto IrIf x x x
       operacao = [ "   cmp " ++ (escreve rx) ++ ", $0"
                  , "   jne " ++ l
                  ]
@@ -529,9 +527,9 @@ geraCodigo (IrXY IrIfFalse x (IrOpLabel l)) contexto =
    (saida, novoEstado)
    where
       (_, _, locais, _, _) = contexto
-      (rx, _, _, prepara, estado1) = getReg contexto IrIf x x x
+      (spillLocais, estado1) = forcarSpillLocais locais estado
+      (rx, _, _, prepara, novoEstado) = getReg contexto IrIf x x x
       -- fim de bloco básico: forçar o spill das locais
-      (spillLocais, novoEstado) = forcarSpillLocais locais estado1
       operacao = [ "   cmp " ++ (escreve rx) ++ ", $0"
                  , "   je " ++ l
                  ]
@@ -661,11 +659,9 @@ geraCodigo (IrXYZ IrDiv x y z) contexto =
       saida = spill ++ prepara ++ operacao
 
 geraCodigo (IrR IrRet) contexto =
-   (saida, novoEstado)
+   (operacao, estado)
    where
       (_, estado, locais, _, _) = contexto
-      -- fim de bloco básico: forçar o spill das locais
-      (spillLocais, novoEstado) = forcarSpillLocais locais estado
       operacao = [ "   popl %edi"
                  , "   popl %esi"
                  , "   popl %ebx"
@@ -673,7 +669,6 @@ geraCodigo (IrR IrRet) contexto =
                  , "   popl %ebp"
                  , "   ret"
                  ]
-      saida = spillLocais ++ operacao
 
 --------------------------------------------------------------------------------------------
 
