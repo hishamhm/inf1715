@@ -188,7 +188,7 @@ estadoInicial :: Estado
 estadoInicial (Registrador r) = Set.empty
 estadoInicial v@(Memoria (IrOpLocal l)) = Set.singleton v
 estadoInicial (Memoria (IrOpTemp t)) = Set.empty
-estadoInicial x = error ("What to do with: " ++ (show x))
+estadoInicial x = error ("Não sei o que fazer com " ++ (show x))
 
 ----------------------------------------------------------------------------------------------------
 
