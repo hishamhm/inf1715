@@ -47,7 +47,7 @@ f:
     .
     popl %edi                <-- sequencia de codigo para ret
     popl %esi
-    popl %ebp
+    popl %ebx
     movl %ebp, %esp
     popl %ebp
     ret
