@@ -27,7 +27,7 @@ fun g()
 .L1:
    $t9 = x < 10
    ifFalse $t9 goto .L2
-   $t4 = 1 + 1
+   $t4 = 100 + 100
    call m
    z = $ret
    $t3 = $t4 + x

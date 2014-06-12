@@ -105,8 +105,7 @@ g:
    cmpl $0, %ebx
    je .L2
    /* 1 */
-   movl $1, %eax
-   addl $1, %eax
+   movl $200, %eax
    /* 2 */
    movl %eax, -48(%ebp) /* spill de IrOpTemp "$t4" de volta para a memoria */
    call m

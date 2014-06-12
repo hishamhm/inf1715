@@ -655,11 +655,11 @@ geraCodigo op@(IrXYZ IrLt x y z) contexto = geraComparacao op contexto "jl" (<)
 
 geraCodigo op@(IrXYZ IrGt x y z) contexto = geraComparacao op contexto "jg" (>)
 
-geraCodigo op@(IrXYZ IrAdd x y z) contexto = geraAritmetica op contexto "addl"
+geraCodigo op@(IrXYZ IrAdd x y z) contexto = geraAritmetica op contexto "addl" (+)
 
-geraCodigo op@(IrXYZ IrSub x y z) contexto = geraAritmetica op contexto "subl"
+geraCodigo op@(IrXYZ IrSub x y z) contexto = geraAritmetica op contexto "subl" (-)
 
-geraCodigo op@(IrXYZ IrMul x y z) contexto = geraAritmetica op contexto "imul"
+geraCodigo op@(IrXYZ IrMul x y z) contexto = geraAritmetica op contexto "imul" (*)
 
 geraCodigo (IrXYZ IrDiv x y z) contexto =
    (saida, novoEstado)
@@ -732,7 +732,12 @@ geraComparacao (IrXYZ op x y z) contexto opcode _ =
 
 --------------------------------------------------------------------------------------------
 
-geraAritmetica (IrXYZ op x y z) contexto opcode =
+-- Evita gerar o código de operação se entre dois números.
+-- Já que estava de bobeira, vamos fazer a mesma pequena otimização aqui.
+geraAritmetica (IrXYZ _ x (IrOpNumero ny) (IrOpNumero nz) ) contexto _ operador =
+   geraCodigo (IrXY IrSet x (IrOpNumero (ny `operador` nz) )) contexto
+
+geraAritmetica (IrXYZ op x y z) contexto opcode _ =
    (saida, novoEstado)
    where
       (rx, ry, rz, prepara, novoEstado) = getReg contexto op x y z
