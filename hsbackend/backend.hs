@@ -30,13 +30,27 @@ geraIr tokens =
 
 ----------------------------------------------------------------------------------------------------
 
+processaGlobais :: [IrGlobal] -> [String]
+processaGlobais glos =
+   map (\ (IrGlobal nome) -> "   .comm "++nome++", 4") glos
+
+----------------------------------------------------------------------------------------------------
+
+processaStrings :: [IrString] -> [String]
+processaStrings strs =
+   concatMap (\ (IrString id valor) -> [id++":", "   .string \""++valor++"\""] ) strs
+
+----------------------------------------------------------------------------------------------------
+
 processaFuncao (IrFuncao nome args cmds) =
    codigo
    where
       blocos = quebraBlocosBasicos cmds
       locais = variaveisLocais cmds args
       numLocais = (((length locais) - (length args)) * 4)
-      codigo = [ (nome ++ ":")
+      codigo = [ (".globl " ++ nome)
+               , (".type " ++ nome ++ ", @function")
+               , (nome ++ ":")
                , "   pushl %ebp"
                , "   movl %esp, %ebp"
                , "   subl $" ++ (show numLocais) ++ ", %esp /* " ++ (show (length locais)) ++ " locais, " ++ (show (length args)) ++ " args "++(concatMap show locais)++" **/"
@@ -50,16 +64,19 @@ processaFuncao (IrFuncao nome args cmds) =
 
 ----------------------------------------------------------------------------------------------------
 
--- Para poder dar print em funções
-instance (Typeable a, Typeable b) => Show (a -> b) where
-    show f = "Function: " ++ (show $ typeOf f)
+exibirSaida (strs, glos, funs) =
+   let
+      globais = processaGlobais glos
+      strings = processaStrings strs
+      funcoes = map processaFuncao funs
+   in do print funcoes
+         writeFile "fun.s" (unlines ([ ".data" ] ++
+                                     globais ++
+                                     [ ".text" ] ++
+                                     strings ++ 
+                                     (map unlines funcoes)))
 
 ----------------------------------------------------------------------------------------------------
-
-exibirSaida (strs, glos, funs) =
-   let funcoes = map processaFuncao funs
-   in do print funcoes
-         writeFile "fun.s" (unlines (map unlines funcoes))
 
 ----------------------------------------------------------------------------------------------------
 --- 1. Repartir as instruções de cada função em blocos básicos (Algoritmo 8.5, Seção 8.4.1)
