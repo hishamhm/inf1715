@@ -520,8 +520,7 @@ geraCodigo (IrX IrRetVal x) contexto =
                  , "   popl %edi"
                  , "   popl %esi"
                  , "   popl %ebx"
-                 , "   movl %ebp, %esp"
-                 , "   popl %ebp"
+                 , "   leave"
                  , "   ret"
                  ]
       saida = spill ++ prepara ++ operacao
