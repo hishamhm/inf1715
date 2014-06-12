@@ -42,7 +42,7 @@ palavrasChaves = [
    ]
 
 palavraChave :: Parser IrToken
-palavraChave = foldl1 (<|>) (map (\(kw, tk) -> do { try (string kw); return tk }) palavrasChaves)
+palavraChave = choice (map (\(kw, tk) -> do { try (string kw); return tk }) palavrasChaves)
 
 umLabel :: Parser String
 umLabel =

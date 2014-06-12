@@ -114,7 +114,7 @@ umRval =
    do { n <- umLITNUM; return (IrOpNumero n) }
    <|> do { i <- umID; return (geraOpId i) }
 
-algumC cs = foldl1 (<|>) (map (\c -> do { k <- try (umC c); return (IrC k) }) cs)
+algumC cs = choice (map (\c -> do { k <- try (umC c); return (IrC k) }) cs)
 
 ehBinOp :: MeuParser IrToken
 ehBinOp = (eh IrEQ) <|> (eh IrNE) <|> (eh IrLE) <|> (eh IrGE) <|> algumC "+-*/<>"
