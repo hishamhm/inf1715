@@ -568,7 +568,9 @@ geraCodigo (IrXY IrNeg x y) contexto =
    (saida, novoEstado)
    where
       (rx, ry, _, prepara, novoEstado) = getReg contexto IrNeg x y y
-      operacao = [ "   negl " ++ (escreve ry) ++ ", " ++ (escreve rx) ]
+      operacao = [ "   movl " ++ (escreve ry) ++ ", " ++ (escreve rx)
+                 , "   negl " ++ (escreve rx)
+                 ]
       saida = prepara ++ operacao
 
 geraCodigo (IrXY IrNew x y) contexto =
