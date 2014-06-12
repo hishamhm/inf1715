@@ -532,21 +532,18 @@ geraCodigo (IrXY IrIf x (IrOpLabel l)) contexto =
       -- fim de bloco básico: forçar o spill das locais
       (spillLocais, novoEstado) = forcarSpillLocais locais estado1
       (rx, _, _, prepara, estado1) = getReg contexto IrIf x x x
-      operacao = [ "   cmp " ++ (escreve rx) ++ ", $0"
-                 , "   jne " ++ l
-                 ]
+      operacao = escolheComparacao rx [] ["    jmp "++l] ["   cmpl $0, " ++ (escreve rx), "   jne " ++ l  ]
       saida = spillLocais ++ prepara ++ operacao
 
 geraCodigo (IrXY IrIfFalse x (IrOpLabel l)) contexto =
    (saida, novoEstado)
    where
-      (_, _, locais, _, _) = contexto
+      (proxUso, estado, locais, nome, i) = contexto
       (spillLocais, estado1) = forcarSpillLocais locais estado
-      (rx, _, _, prepara, novoEstado) = getReg contexto IrIf x x x
+      contexto2 = (proxUso, estado1, locais, nome, i)
+      (rx, _, _, prepara, novoEstado) = getReg contexto2 IrIf x x x
       -- fim de bloco básico: forçar o spill das locais
-      operacao = [ "   cmp " ++ (escreve rx) ++ ", $0"
-                 , "   je " ++ l
-                 ]
+      operacao = escolheComparacao rx ["    jmp "++l]  []  ["   cmpl $0, " ++ (escreve rx), "   je " ++ l  ]
       saida = spillLocais ++ prepara ++ operacao
 
 geraCodigo (IrXY IrSet x y) contexto =
@@ -683,6 +680,15 @@ geraCodigo (IrR IrRet) contexto =
                  , "   popl %ebp"
                  , "   ret"
                  ]
+
+--------------------------------------------------------------------------------------------
+
+-- Escolhe entre três opções de código, se o valor passado é 0, outro número, ou outra coisa.
+-- Isto é necessário porque coisas como `cmpl $0, $0` são proibidas.
+escolheComparacao :: Descritor -> [String] -> [String] -> [String]  -> [String] 
+escolheComparacao (Memoria (IrOpNumero 0)) seZero seNaoZero seOutro = seZero
+escolheComparacao (Memoria (IrOpNumero n)) seZero seNaoZero seOutro = seNaoZero
+escolheComparacao _                        seZero seNaoZero seOutro = seOutro
 
 --------------------------------------------------------------------------------------------
 
