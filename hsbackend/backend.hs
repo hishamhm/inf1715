@@ -643,17 +643,17 @@ geraCodigo (IrXYZ IrIdxSetByte x y z) contexto =
                  ]
       saida = prepara ++ operacao
 
-geraCodigo op@(IrXYZ IrNe x y z) contexto = geraComparacao op contexto "jne"
+geraCodigo op@(IrXYZ IrNe x y z) contexto = geraComparacao op contexto "jne" (/=)
 
-geraCodigo op@(IrXYZ IrEq x y z) contexto = geraComparacao op contexto "je"
+geraCodigo op@(IrXYZ IrEq x y z) contexto = geraComparacao op contexto "je" (==)
 
-geraCodigo op@(IrXYZ IrLe x y z) contexto = geraComparacao op contexto "jle"
+geraCodigo op@(IrXYZ IrLe x y z) contexto = geraComparacao op contexto "jle" (<=)
 
-geraCodigo op@(IrXYZ IrGe x y z) contexto = geraComparacao op contexto "jge"
+geraCodigo op@(IrXYZ IrGe x y z) contexto = geraComparacao op contexto "jge" (>=)
 
-geraCodigo op@(IrXYZ IrLt x y z) contexto = geraComparacao op contexto "jl"
+geraCodigo op@(IrXYZ IrLt x y z) contexto = geraComparacao op contexto "jl" (<)
 
-geraCodigo op@(IrXYZ IrGt x y z) contexto = geraComparacao op contexto "jg"
+geraCodigo op@(IrXYZ IrGt x y z) contexto = geraComparacao op contexto "jg" (>)
 
 geraCodigo op@(IrXYZ IrAdd x y z) contexto = geraAritmetica op contexto "addl"
 
@@ -682,8 +682,7 @@ geraCodigo (IrR IrRet) contexto =
       operacao = [ "   popl %edi"
                  , "   popl %esi"
                  , "   popl %ebx"
-                 , "   movl %ebp, %esp"
-                 , "   popl %ebp"
+                 , "   leave"
                  , "   ret"
                  ]
 
@@ -704,14 +703,24 @@ geraTempLabels contexto =
    where
       (_, _, _, nome, i) = contexto
 
-geraComparacao :: IrInstr -> Contexto -> String -> ([String], Estado)
+--------------------------------------------------------------------------------------------
 
-geraComparacao (IrXYZ op x y z) contexto opcode =
+geraComparacao :: IrInstr -> Contexto -> String -> (Int -> Int -> Bool) -> ([String], Estado)
+
+-- Evita gerar o código de comparação se a comparação pode ser feita
+-- em tempo de compilação. Escrever essa pequena otimização é mais rápido
+-- do que gerar o código não-otimizado correto.
+geraComparacao (IrXYZ _ x (IrOpNumero ny) (IrOpNumero nz) ) contexto _ operador =
+   if ny `operador` nz
+   then geraCodigo (IrXY IrSet x (IrOpNumero 1)) contexto
+   else geraCodigo (IrXY IrSet x (IrOpNumero 0)) contexto
+
+geraComparacao (IrXYZ op x y z) contexto opcode _ =
    (saida, novoEstado)
    where
       (rx, ry, rz, prepara, novoEstado) = getReg contexto op x y z
       (l1, l2) = geraTempLabels contexto
-      operacao = [ "   cmpl " ++ (escreve ry) ++ ", " ++ (escreve rz)
+      operacao = [ "   cmpl " ++ (escreve rz) ++ ", " ++ (escreve ry)
                  , "   "++opcode++" " ++ l1
                  , "   movl $0, " ++ (escreve rx)
                  , "   jmp " ++ l2
