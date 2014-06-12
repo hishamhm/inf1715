@@ -1,9 +1,9 @@
 string id = "bla"
 string zz = "blo"
 
-global g
-global h
-global j
+global glob
+global hlob
+global jlob
 
 fun f(a, b, c)
    x = 9
@@ -12,6 +12,13 @@ fun f(a, b, c)
    a = 12
    vovo = 15
    blabla = 16
+   ret vovo
+
+fun bytops()
+   i = byte 0
+   v = new byte 10
+   i = byte v[y]
+   v[x] = byte i
    ret
 
 fun g()
