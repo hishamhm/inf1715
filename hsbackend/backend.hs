@@ -118,8 +118,8 @@ escreve1le2 IrSetIdx = True
 escreve1le2 IrSetIdxByte = True
 escreve1le2 _ = False
 
-escreve0le3 IrIdxSet = False
-escreve0le3 IrIdxSetByte = False
+escreve0le3 IrIdxSet = True
+escreve0le3 IrIdxSetByte = True
 escreve0le3 _ = False
 
 escreve1le1 IrSet = True
