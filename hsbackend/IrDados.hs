@@ -18,7 +18,7 @@ data IrToken = IrFUN
              | IrRET
              | IrNL
              | IrLITSTRING String
-             | IrLITNUM Integer
+             | IrLITNUM Int
              | IrEQ
              | IrNE
              | IrLE
@@ -36,7 +36,7 @@ data IrOp = IrOpGlobal String
           | IrOpLocal String
           | IrOpTemp String
           | IrOpLabel String
-          | IrOpNumero Integer
+          | IrOpNumero Int
           | IrOpString String
           | IrOpFuncao String
    deriving (Show, Eq, Ord, Typeable)

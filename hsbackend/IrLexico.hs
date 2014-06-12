@@ -55,7 +55,7 @@ lexico =
    many ( many (oneOf " \t") >> (
       palavraChave
       <|> do { c <- oneOf "(,):=[]<>+-*/"; return (IrC c) }
-      <|> do { n <- many1 digit;           return (IrLITNUM (read n :: Integer)) }
+      <|> do { n <- many1 digit;           return (IrLITNUM (read n :: Int)) }
       <|> do { s <- stringLiteral;         return (IrLITSTRING s) }
       <|> do { s <- identificador;         return (IrID s) }
       <|> do { l <- umLabel;               return (IrLABEL l) }

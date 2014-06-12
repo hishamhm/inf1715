@@ -39,7 +39,7 @@ umLABEL = tokenPrim show ignoraPos testa
    where testa (IrLABEL s) = Just s
          testa _           = Nothing
 
-umLITNUM :: GenParser IrToken st Integer
+umLITNUM :: GenParser IrToken st Int
 umLITNUM = tokenPrim (\(IrLITNUM n) -> show n) ignoraPos testa
    where testa (IrLITNUM n) = Just n
          testa _            = Nothing
