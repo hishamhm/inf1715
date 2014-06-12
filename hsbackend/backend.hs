@@ -553,6 +553,10 @@ geraCodigo (IrXY IrSet x y) contexto =
       operacao = [ "   movl " ++ (escreve ry) ++ ", " ++ (escreve rx) ]
       saida = prepara ++ operacao
 
+-- Não gera movsbl quando o parâmetro é um número
+geraCodigo (IrXY IrSetByte x y@(IrOpNumero n)) contexto =
+   geraCodigo (IrXY IrSet x y) contexto
+
 geraCodigo (IrXY IrSetByte x y) contexto =
    (saida, novoEstado)
    where
