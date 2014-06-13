@@ -192,7 +192,6 @@ Instr* Instr_new(Opcode op, ...) {
 		case OP_LABEL:
 		case OP_GOTO:
 		case OP_PARAM:
-		case OP_CALL:
 		case OP_RET_VAL:
 		{
 			ins->x = va_arg(ap, Addr);
@@ -206,6 +205,7 @@ Instr* Instr_new(Opcode op, ...) {
 		case OP_NEG:
 		case OP_NEW:
 		case OP_NEW_BYTE:
+		case OP_CALL:
 		{
 			ins->x = va_arg(ap, Addr);
 			ins->y = va_arg(ap, Addr);
@@ -254,7 +254,7 @@ static void Instr_dump(Instr* ins, FILE* fd) {
 		case OP_LABEL:		fmt = "%s:\n";			break;
 		case OP_GOTO:		fmt = "\tgoto %s\n";		break;
 		case OP_PARAM:		fmt = "\tparam %s\n";		break;
-		case OP_CALL:		fmt = "\tcall %s\n";		break;
+		case OP_CALL:		fmt = "\tcall %s %s\n";		break;
 		case OP_IF:		fmt = "\tif %s goto %s\n";	break;
 		case OP_IF_FALSE:	fmt = "\tifFalse %s goto %s\n";	break;
 		case OP_SET:		fmt = "\t%s = %s\n";		break;

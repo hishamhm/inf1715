@@ -118,7 +118,7 @@ unop		: '-' { $$.op = OP_NEG; }
 call		: params
                   /* In case of functions with a return value,
                      assume that this is stored in special temporary $ret */ 
-		  CALL ID { $$.ins = Instr_link($1.ins, Instr_new(OP_CALL, Addr_function($3.asString))); }
+		  CALL ID LITNUM { $$.ins = Instr_link($1.ins, Instr_new(OP_CALL, Addr_function($3.asString), Addr_litNum($4.asInteger))); }
                 ;
 
 params		: param nl params { $$.ins = Instr_link($1.ins, $3.ins); }

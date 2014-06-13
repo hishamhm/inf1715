@@ -43,7 +43,7 @@ fun h()
    i = v[y]
    v[x] = i
    param x
-   call f
+   call f 1
 .L3:
    ret
 
@@ -52,8 +52,8 @@ fun i()
    y = 0
    $t5 = x + y
    x = $t5
-   call g
-   call h
+   call g 0
+   call h 0
    ret 12
    
 fun j()
@@ -71,6 +71,6 @@ fun j()
    a = b * c
    a = b / c
    a = -b
-   call g
-   call i
+   call g 0
+   call i 0
    ret
