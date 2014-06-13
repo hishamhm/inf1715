@@ -55,6 +55,7 @@ bytops:
    movl %eax, -4(%ebp) /* spill de IrOpLocal "i" de volta para a memoria */
    pushl $10
    call malloc
+   addl $4, %esp
    movl %eax, %ebx
    /* 3 */
    movl -16(%ebp), %ecx /* carrega IrOpLocal "y" em ecx */
@@ -107,68 +108,72 @@ g:
    /* 1 */
    movl $200, %eax
    /* 2 */
+   pushl $123
+   /* 3 */
    movl %eax, -48(%ebp) /* spill de IrOpTemp "$t4" de volta para a memoria */
    call m
-   /* 3 */
+   addl $4, %esp
+   /* 4 */
    movl %eax, %ebx /* carrega IrOpTemp "$ret" em ebx */
    movl %ebx, %ecx
-   /* 4 */
+   /* 5 */
    movl -20(%ebp), %edx /* carrega IrOpLocal "x" em edx */
    movl %eax, %edi
    addl %edx, %edi
-   /* 5 */
+   /* 6 */
 /* weee, score 0! */
    movl %edi, %edx
    addl %edx, %edx
-   /* 6 */
+   /* 7 */
 /* weee, score 0! */
    movl %edx, %eax
    addl $3, %eax
-   /* 7 */
+   /* 8 */
    movl %edi, -44(%ebp) /* spill de IrOpTemp "$t3" de volta para a memoria */
    movl %eax, %edi
    addl $9, %edi
-   /* 8 */
+   /* 9 */
    movl %edi, -32(%ebp) /* spill de IrOpTemp "$t0" de volta para a memoria */
    movl $0, %edi
-   /* 9 */
+   /* 10 */
    movl %eax, -36(%ebp) /* spill de IrOpTemp "$t1" de volta para a memoria */
    movl %ecx, -28(%ebp) /* spill de IrOpLocal "z" de volta para a memoria */
    movl %edx, -40(%ebp) /* spill de IrOpTemp "$t2" de volta para a memoria */
 /* weee, score 0! */
    pushl $10
    call malloc
+   addl $4, %esp
    movl %eax, %edi
-   /* 10 */
+   /* 11 */
    movl -24(%ebp), %edx /* carrega IrOpLocal "y" em edx */
 /* weee, score 0! */
 /* weee, score 0! */
    movl %edx, %esi
    addl %edi, %esi
    movsbl (%esi), %edx
-   /* 11 */
+   /* 12 */
    movl -20(%ebp), %edi /* carrega IrOpLocal "x" em edi */
 /* weee, score 0! */
    movl %edi, %esi
    addl %edi, %esi
    movb %edx, (%esi)
-   /* 12 */
+   /* 13 */
    movl -32(%ebp), %ecx /* carrega IrOpTemp "$t0" em ecx */
 /* weee, score 0! */
 /* weee, score 0! */
    movl %ecx, %ecx
-   /* 13 */
-   movl $9, %ecx
    /* 14 */
+   movl $9, %ecx
+   /* 15 */
    movl -4(%ebp), %ecx /* carrega IrOpLocal "g" em ecx */
 /* weee, score 0! */
    movl %ecx, %ecx
-   /* 15 */
+   /* 16 */
    movl -24(%ebp), %eax /* carrega IrOpLocal "y" em eax */
 /* weee, score 0! */
    movl %eax, %eax
    addl $1, %eax
-   /* 16 */
+   /* 17 */
    /* crazy spill time! */
    movl %eax, -24(%ebp) /* spill de IrOpLocal "y" de volta para a memoria */
    movl %ebx, %eax /* spill de IrOpTemp "$ret" de volta para a memoria */
@@ -212,6 +217,7 @@ h:
    imul $4, %esi
    pushl %esi
    call malloc
+   addl $4, %esp
    movl %eax, %ebx
    /* 3 */
    movl -16(%ebp), %ecx /* carrega IrOpLocal "y" em ecx */
@@ -233,6 +239,7 @@ h:
    movl %ecx, -16(%ebp) /* spill de IrOpLocal "y" de volta para a memoria */
    movl %edx, -12(%ebp) /* spill de IrOpLocal "x" de volta para a memoria */
    call f
+   addl $4, %esp
    /* 1 */
 .L3:
    /* 2 */
@@ -264,11 +271,17 @@ i:
    movl %eax, -4(%ebp) /* spill de IrOpLocal "x" de volta para a memoria */
    movl %ecx, -12(%ebp) /* spill de IrOpTemp "$t5" de volta para a memoria */
    call g
+   addl $0, %esp
    /* 6 */
+   movl %eax, %edx /* carrega IrOpTemp "$ret" em edx */
+   pushl %edx
+   /* 7 */
    movl %eax, -4(%ebp) /* spill de IrOpLocal "x" de volta para a memoria */
    movl %ecx, -12(%ebp) /* spill de IrOpTemp "$t5" de volta para a memoria */
+   movl %edx, %eax /* spill de IrOpTemp "$ret" de volta para a memoria */
    call h
-   /* 7 */
+   addl $4, %esp
+   /* 8 */
    movl %eax, -4(%ebp) /* spill de IrOpLocal "x" de volta para a memoria */
    movl $12, %eax
    popl %edi
@@ -362,10 +375,12 @@ j:
    movl %eax, -4(%ebp) /* spill de IrOpLocal "a" de volta para a memoria */
    movl %ecx, -12(%ebp) /* spill de IrOpLocal "c" de volta para a memoria */
    call g
+   addl $0, %esp
    /* 16 */
    movl %eax, -4(%ebp) /* spill de IrOpLocal "a" de volta para a memoria */
    movl %ecx, -12(%ebp) /* spill de IrOpLocal "c" de volta para a memoria */
    call i
+   addl $0, %esp
    /* 17 */
    popl %edi
    popl %esi

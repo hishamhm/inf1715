@@ -151,7 +151,7 @@ umComando =
    <|> try (do { eh IrIFFALSE; x <- umRval; eh IrGOTO; y <- umLABEL;                            return (IrXY IrIfFalse x (IrOpLabel y)) })
    <|> try (do { eh IrGOTO; x <- umLABEL;                                                       return (IrX IrGoto (IrOpLabel x)) })
    <|> try (do { eh IrPARAM; x <- umRval;                                                       return (IrX IrParam x) })
-   <|> try (do { eh IrCALL; x <- umID;                                                          return (IrX IrCall (IrOpFuncao x)) })
+   <|> try (do { eh IrCALL; x <- umID; y <- umLITNUM;                                           return (IrXY IrCall (IrOpFuncao x) (IrOpNumero y)) })
    <|> try (do { eh IrRET; x <- umRval;                                                         return (IrX IrRetVal x) })
    <|> try (do { eh IrRET;                                                                      return (IrR IrRet) })
 

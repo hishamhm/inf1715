@@ -498,14 +498,15 @@ geraCodigo (IrX IrParam x) contexto =
       operacao = [ "   pushl " ++ (escreve rx) ]
       saida = prepara ++ operacao
 
-geraCodigo (IrX IrCall x@(IrOpFuncao f)) contexto =
+geraCodigo (IrXY IrCall x@(IrOpFuncao f) (IrOpNumero n)) contexto =
    (saida, novoEstado)
    where
       (_, estado, locais, _, _) = contexto
---      (_, _, _, prepara, estado1) = getReg contexto IrCall x x x
       -- liberar registradores pela convenção de chamada
       (spill, novoEstado) = forcarSpill locais estado [Registrador "eax", Registrador "ecx", Registrador "edx"]
-      operacao = [ "   call " ++ f ]
+      operacao = [ "   call " ++ f
+                 , "   addl $" ++ (show (n * 4)) ++ ", %esp"
+                 ]
       saida = spill ++ operacao
 
 geraCodigo (IrX IrRetVal x) contexto =
@@ -584,6 +585,7 @@ geraCodigo (IrXY IrNew x y) contexto =
                  , "   imul $4, %esi"
                  , "   pushl %esi"
                  , "   call malloc"
+                 , "   addl $4, %esp"
                  , "   movl %eax, " ++ (escreve rx)
                  ]
       saida = spill ++ prepara ++ operacao
@@ -597,6 +599,7 @@ geraCodigo (IrXY IrNewByte x y) contexto =
       (spill, novoEstado) = forcarSpill locais estado1 [Registrador "eax", Registrador "ecx", Registrador "edx"]
       operacao = [ "   pushl " ++ (escreve ry)
                  , "   call malloc"
+                 , "   addl $4, %esp"
                  , "   movl %eax, " ++ (escreve rx)
                  ]
       saida = spill ++ prepara ++ operacao
